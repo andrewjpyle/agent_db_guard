@@ -1,0 +1,30 @@
+{
+  "_comment": "Framework-agnostic example: gate a raw `psql` that writes to prod, plus a couple of custom CLI verbs. Copy to .agent-db-guard.json and edit.",
+
+  "destructive": {
+    "_subcommand_pattern_comment": "How to extract the 'subcommand' token from a command line. Here we treat the first word after your CLI's name as the subcommand. Adjust to your tool, or drop it entirely and rely on psql + sql_write_verbs.",
+    "subcommand_pattern": "mycli\\s+([a-zA-Z_][\\w-]*)",
+
+    "exact_subcommands": ["migrate", "rollback"],
+    "verbs": ["seed", "truncate", "drop", "wipe", "reset", "destroy"],
+
+    "shell_subcommands": [],
+    "orm_write_markers": [],
+
+    "sql_write_verbs": [
+      "insert", "update", "delete", "drop",
+      "truncate", "alter", "create", "grant", "revoke"
+    ]
+  },
+
+  "prod_signals": {
+    "substrings": [
+      "prod.db.internal",
+      "amazonaws.com",
+      "PGDATABASE=production"
+    ],
+    "wrapper_words": []
+  },
+
+  "message": "DESTRUCTIVE write against PRODUCTION. Confirm the connection string before approving."
+}

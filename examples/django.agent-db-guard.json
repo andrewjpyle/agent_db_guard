@@ -1,0 +1,50 @@
+{
+  "_comment": "Django example. Copy to your project root as .agent-db-guard.json and edit prod_signals to match YOUR production database. The destructive lists below are a sensible Django default; trim or extend them.",
+
+  "destructive": {
+    "subcommand_pattern": "manage\\.py\\s+([a-zA-Z_][\\w-]*)",
+
+    "exact_subcommands": [
+      "migrate",
+      "flush",
+      "loaddata",
+      "sqlflush",
+      "reset_db",
+      "createsuperuser",
+      "remove_stale_contenttypes",
+      "dbshell"
+    ],
+
+    "_verbs_comment": "Whole-token verbs that mark a CUSTOM management command destructive. Matched token-by-token, never as substrings, so 'drop' does NOT fire on sync_raindrop / archive_to_dropbox. Note 'import' is deliberately absent: bulk imports are additive upserts (recoverable), not the irreversible class — and Django's own fixture import (loaddata) is already caught above.",
+    "verbs": [
+      "seed", "backfill", "populate", "wipe", "purge",
+      "truncate", "destroy", "drop", "delete", "restore", "reset"
+    ],
+
+    "shell_subcommands": ["shell", "shell_plus"],
+    "orm_write_markers": [
+      ".save(", ".delete(", ".update(", ".create(",
+      ".get_or_create(", ".update_or_create(",
+      "bulk_create", "bulk_update", "cursor.execute", ".raw("
+    ],
+
+    "sql_write_verbs": [
+      "insert", "update", "delete", "drop",
+      "truncate", "alter", "create", "grant", "revoke"
+    ]
+  },
+
+  "prod_signals": {
+    "_substrings_comment": "EDIT THIS. Literal strings that appear in a command whose DB target is production — your prod DB host, its IP, a droplet marker. These are examples; replace them.",
+    "substrings": [
+      "prod-db.example.com",
+      "10.0.0.5",
+      "prod-droplet"
+    ],
+
+    "_wrapper_words_comment": "Whole-token command runners that ALWAYS resolve to prod in your setup — e.g. a secrets injector whose only config points at prod. Leave empty if you don't have one. This is the escape hatch for 'I can't see the resolved host, but this wrapper means prod.'",
+    "wrapper_words": []
+  },
+
+  "message": "This command runs a DESTRUCTIVE operation against the PRODUCTION database. Verify the target DB host (and that you intend to write prod) before approving."
+}
