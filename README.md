@@ -99,3 +99,13 @@ cd tests && python3 -m unittest discover -v
 ## License
 
 MIT
+
+---
+
+## Part of a larger system
+
+`agent_db_guard` is one of the reusable pieces pulled out of a private, autonomous build
+system and released on its own — the machine needed it, so it built it, and now
+it's yours too, MIT-licensed.
+
+See the rest of the parts → **https://autonomousaj.com/parts**
