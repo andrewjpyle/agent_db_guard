@@ -1,0 +1,14 @@
+{
+  "name": "hook_ask_raw",
+  "command": [
+    "python3",
+    "../../agent_db_guard.py"
+  ],
+  "exit_code": 0,
+  "captured_at": "2026-10-02T01:24:55+00:00",
+  "commit": "f2b24571e8dd7c154907c9ec1bce893e73f2741b",
+  "line_count": 1,
+  "env_passed": [],
+  "note": "",
+  "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"ask\", \"permissionDecisionReason\": \"DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\\n\\nMatched destructive operation: `migrate`.\"}}\n"
+}

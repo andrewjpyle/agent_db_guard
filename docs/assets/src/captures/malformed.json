@@ -1,0 +1,15 @@
+{
+  "name": "malformed",
+  "command": [
+    "python3",
+    "replay.py",
+    "malformed.txt"
+  ],
+  "exit_code": 0,
+  "captured_at": "2026-10-02T01:24:55+00:00",
+  "commit": "f2b24571e8dd7c154907c9ec1bce893e73f2741b",
+  "line_count": 6,
+  "env_passed": [],
+  "note": "",
+  "output": "[01] $ (malformed payload) [\"not\", \"an\", \"object\"]\n     exit 0 | no decision: normal permission flow\n[02] $ (malformed payload) {\"tool_name\": \"Bash\", \"tool_input\": \"psql -c drop\"}\n     exit 0 | no decision: normal permission flow\n[03] $ (malformed payload) not json at all\n     exit 0 | no decision: normal permission flow\n"
+}

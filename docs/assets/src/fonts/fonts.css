@@ -1,0 +1,4 @@
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:400;font-display:block;src:url('FONTDIR/Fraunces-italic-400.woff2') format('woff2')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500;font-display:block;src:url('FONTDIR/Fraunces-normal-500.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:block;src:url('FONTDIR/Inter-variable.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:block;src:url('FONTDIR/JetBrainsMono-variable.woff2') format('woff2')}

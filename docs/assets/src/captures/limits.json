@@ -1,0 +1,15 @@
+{
+  "name": "limits",
+  "command": [
+    "python3",
+    "replay.py",
+    "limits.jsonl"
+  ],
+  "exit_code": 0,
+  "captured_at": "2026-10-02T01:24:55+00:00",
+  "commit": "f2b24571e8dd7c154907c9ec1bce893e73f2741b",
+  "line_count": 6,
+  "env_passed": [],
+  "note": "",
+  "output": "[01] $ dropdb -h prod-db.example.com shop\n     exit 0 | no decision: normal permission flow\n[02] $ CMD=migrate; secretsrunner -- python manage.py $CMD\n     exit 0 | no decision: normal permission flow\n[03] $ DATABASE_URL=$PROD_URL python manage.py migrate\n     exit 0 | no decision: normal permission flow\n"
+}
