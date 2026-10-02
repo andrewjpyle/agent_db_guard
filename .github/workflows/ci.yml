@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Unit tests (with a floor on the test count)
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee test.log
+          ran=$(grep -oE '^Ran [0-9]+ tests' test.log | grep -oE '[0-9]+')
+          echo "ran=$ran"
+          test "$ran" -ge 42
+
+      - name: Replay the demo session through the real hook
+        working-directory: examples/demo
+        run: |
+          set -o pipefail
+          python replay.py session.jsonl | tee session.out
+          test "$(grep -c '| ASK' session.out)" -eq 5
+          test "$(grep -c '| no decision' session.out)" -eq 4
+          python replay.py malformed.txt | tee malformed.out
+          test "$(grep -c 'exit 0 | no decision' malformed.out)" -eq 3
