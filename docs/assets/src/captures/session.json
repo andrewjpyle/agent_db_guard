@@ -1,0 +1,15 @@
+{
+  "name": "session",
+  "command": [
+    "python3",
+    "replay.py",
+    "session.jsonl"
+  ],
+  "exit_code": 0,
+  "captured_at": "2026-10-02T01:24:55+00:00",
+  "commit": "f2b24571e8dd7c154907c9ec1bce893e73f2741b",
+  "line_count": 28,
+  "env_passed": [],
+  "note": "",
+  "output": "[01] $ psql -h prod-db.example.com -d shop -c \"SELECT count(*) FROM orders WHERE created_at > now() - interval '1 day'\"\n     exit 0 | no decision: normal permission flow\n[02] $ secretsrunner -- python manage.py showmigrations\n     exit 0 | no decision: normal permission flow\n[03] $ python manage.py migrate\n     exit 0 | no decision: normal permission flow\n[04] $ secretsrunner -- python manage.py archive_to_dropbox\n     exit 0 | no decision: normal permission flow\n[05] $ secretsrunner -- python manage.py migrate\n     exit 0 | ASK\n       DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\n       Matched destructive operation: `migrate`.\n[06] $ psql -h prod-db.example.com -d shop -c \"SELECT 1; DELETE FROM orders\"\n     exit 0 | ASK\n       DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\n       Matched destructive operation: `psql (write)`.\n[07] $ cat cleanup.sql | psql -h prod-db.example.com -d shop\n     exit 0 | ASK\n       DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\n       Matched destructive operation: `psql (script)`.\n[08] $ echo 'Order.objects.filter(test=True).delete()' | secretsrunner -- python manage.py shell\n     exit 0 | ASK\n       DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\n       Matched destructive operation: `shell (ORM write)`.\n[09] $ secretsrunner -- python manage.py 'flush' --no-input\n     exit 0 | ASK\n       DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving.\n       Matched destructive operation: `flush`.\n"
+}

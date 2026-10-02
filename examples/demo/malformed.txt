@@ -1,0 +1,3 @@
+["not", "an", "object"]
+{"tool_name": "Bash", "tool_input": "psql -c drop"}
+not json at all
