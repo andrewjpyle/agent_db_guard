@@ -126,7 +126,7 @@ def _reads_script_from_stdin(command: str, program: re.Pattern) -> bool:
             return True
         if i > 0:
             upstream = segs[i - 1].strip().split()
-            if False:  # SEEDED BREAK for CI red proof
+            if not upstream or upstream[0].rsplit("/", 1)[-1] not in _INLINE_FEEDERS:
                 return True
     return False
 
