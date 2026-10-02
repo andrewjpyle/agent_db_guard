@@ -1,0 +1,16 @@
+{
+  "_comment": "SAMPLE DATA for the demo. Acme Shop is a fictional company and prod-db.example.com is a reserved example domain. The Django example config with the demo's prod signals filled in.",
+  "destructive": {
+    "subcommand_pattern": "(?:manage\\.py|django-admin)\\s+([a-zA-Z_][\\w-]*)",
+    "exact_subcommands": ["migrate", "flush", "loaddata", "sqlflush", "reset_db", "createsuperuser", "remove_stale_contenttypes", "dbshell"],
+    "verbs": ["seed", "backfill", "populate", "wipe", "purge", "truncate", "destroy", "drop", "delete", "restore", "reset"],
+    "shell_subcommands": ["shell", "shell_plus"],
+    "orm_write_markers": [".save(", ".delete(", ".update(", ".create(", ".get_or_create(", ".update_or_create(", "bulk_create", "bulk_update", "cursor.execute", ".raw("],
+    "sql_write_verbs": ["insert", "update", "delete", "drop", "truncate", "alter", "create", "grant", "revoke"]
+  },
+  "prod_signals": {
+    "substrings": ["prod-db.example.com"],
+    "wrapper_words": ["secretsrunner"]
+  },
+  "message": "DESTRUCTIVE operation against the PRODUCTION database. Verify the target host before approving."
+}

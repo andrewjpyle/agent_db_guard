@@ -1,0 +1,13 @@
+{
+  "session_id": "demo-0001",
+  "transcript_path": "/srv/acme-shop/.demo/transcript.jsonl",
+  "cwd": "/srv/acme-shop",
+  "permission_mode": "default",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "secretsrunner -- python manage.py migrate",
+    "description": "Apply the new migration to prod"
+  },
+  "tool_use_id": "toolu_demo_05"
+}
